@@ -1,0 +1,27 @@
+"VertexLitGeneric"
+{
+	"$color"				"[1 1 1]"
+	"$baseTexture"			"zerochain/props_zprinter/printer/zpr_printer"
+	$bumpmap  "null-bumpmap"
+	
+	"$surfaceprop" "metal"
+	"$model" 1
+	"$halflambert" 1
+	
+	
+	$envmap env_cubemap
+	"$normalmapalphaenvmapmask" "1"	
+	$envmaptint "[0.01 0.01 0.01]"
+	$envmapfresnel 0.01
+
+	$phong 1
+	$phongexponent 100
+	$phongfresnelranges "[1 2 3]"
+	$phongalbedotint 1
+	$phongboost 0.5
+	
+	$rimlight               1
+	$rimlightexponent      15
+	$rimlightboost         0.1
+	$rimmask 1
+}

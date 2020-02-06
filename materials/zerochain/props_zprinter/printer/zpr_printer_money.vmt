@@ -1,0 +1,15 @@
+"VertexLitGeneric"
+{
+	"$color"				"[1 1 1]"
+	"$baseTexture"			"zerochain/props_zprinter/printer/zpr_printer_money"
+	
+		 "Proxies"
+        {
+                "TextureScroll"
+                {
+                        "texturescrollvar" "$baseTextureTransform"
+                        "texturescrollrate" .5
+                        "texturescrollangle" 90
+                }
+        }	
+}

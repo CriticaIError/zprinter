@@ -9,6 +9,7 @@ zPrint.plugins = zPrint.plugins || {}
 zPrint.tabs = zPrint.tabs || {}
 zPrint.Language = zPrint.Language || {}
 zPrint.cfg = zPrint.cfg || {}
+zPrint.Icons = zPrint.Icons || {}
 
 local variables = {
     "syncSettings",

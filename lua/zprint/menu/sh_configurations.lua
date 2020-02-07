@@ -1,9 +1,7 @@
 
-
-local circleIcon = Material( "materials/gprinters/circle_32.png", "smooth" )
 zPrint.tabs[ 0 ] = { loadPanels = function( parent )
     local time = CurTime()
-local tim = 1
+    local tim = 1
     local selected = "General"
 	local scrollPanel = vgui.Create( "zPrint.Parent", parent )
 	scrollPanel:SetSize( parent:GetWide(), parent:GetTall() )
@@ -67,10 +65,10 @@ local tim = 1
 
                 if value == true then
                     zPrint:addText( "Active", "Montserrat", 16, w - 45, 15, Color( 50, 200, 80, 150 ), 2 )
-                    zPrint:drawPicture( w - 45, 0, 32, 32, circleIcon, Color( 50, 200, 80, 150 ) )
+                    zPrint:drawPicture( w - 45, 0, 32, 32, zPrint:getIcon( "closeIcon" ), Color( 50, 200, 80, 150 ) )
                 else
                     zPrint:addText( "Inactive", "Montserrat", 16, w - 45, 15, Color( 200, 50, 80, 150 ), 2 )
-                    zPrint:drawPicture( w - 45, 0, 32, 32, circleIcon, Color( 200, 50, 80, 150 ) )
+                    zPrint:drawPicture( w - 45, 0, 32, 32, zPrint:getIcon( "closeIcon" ), Color( 200, 50, 80, 150 ) )
                 end
 			end
 

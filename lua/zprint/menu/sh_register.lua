@@ -1,12 +1,4 @@
--->Icons used on this tab
-------------------------------------------------------------------------------------------------
-local attachIcony = Material( "materials/gprinters/circle_check_32.png", "smooth noclamp" )
-local circleIcon = Material( "materials/gprinters/circle_clean_32.png", "smooth noclamp" )
-local attachIconn = Material( "materials/gprinters/prohibited_32.png", "smooth noclamp" )
-local right = Material( "materials/gprinters/right_32_alt.png", "smooth noclamp" )
-local entityIcon = Material( "materials/gprinters/crafts_128.png", "smooth" )
-------------------------------------------------------------------------------------------------
---Tab Setup Configurations
+
 local pTable = {}
 local pID = ""
 local stephover = {}
@@ -52,24 +44,7 @@ if CLIENT then
         end
         return true    
     end
-    pTable[ pID ] = {
-        cmd = string.lower( "z" .. string.Replace( name:GetValue(), " ", "_" ) ),
-        name = name:GetValue(),
-        health = health:GetValue(),
-        sound = sound:GetValue(),
-        category = category:GetValue(),
-        amount = amount:GetValue(),
-        tiempo = tiempo:GetValue(),
-        holdamount = holdamount:GetValue(),
-        f4order = f4order:GetValue(),
-        cpremovalval = cpremovalval,
-        policeremovalreward = policeremovalreward:GetValue(),
-        donation_rank = donation_rank:GetValue(),
-        overheatchance = overheatchance:GetValue(),
-        printer_level = printer_level:GetValue(),
-        color = pcolor.valor
-    }
-
+    
     function zPrint:formValidation( printer, id )
         local ent = printer[ id ]
         if ent.name == "" || ent.color == "" || ent.sound == "Choose your sound" || ent.sound == "" || ent.category == "Select Category" || ent.health == "" || ent.health == 0 || ent.amount == "" || ent.tiempo == "" || ent.holdamount == "" || ent.f4order == "" || ent.cpremovalval == "" || ent.policeremovalreward == "" || donation_rank == "" || ent.overheatchance == "" || ent.printer_level == "" then
@@ -101,6 +76,7 @@ if CLIENT then
 end
 
 zPrint.tabs[ 9 ] = { loadPanels = function( parent )
+  --------------------------------------------------------------------------------  
     table_jobs = {}
     attachments = {}
     group_table = {}
@@ -159,7 +135,7 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
         zPrint:addText( "it will display something if it's correct, otherwise it will be empty.", "Montserrat", 19, 105, 110, Color( 163, 163, 163, 150 ), 0 )
 
 
-        zPrint:drawPicture( -5, 25, 128, 128, entityIcon, Color( 163, 163, 163, 50 * alpha ) )
+        zPrint:drawPicture( -5, 25, 128, 128, zPrint:getIcon( "craftsIcon" ), Color( 163, 163, 163, 50 * alpha ) )
         zPrint:roundedBox( 0, 530, 180, 10, 270, Color( 21, 22, 27, 150 * alpha  ) )
         zPrint:roundedBox( 0, 545, 180, 330, 270, Color( 21, 22, 27, 150 * alpha  ) )
         zPrint:roundedBox( 0, 545, 142, 330, 36, Color( 21, 22, 27, 150 * alpha  ) )
@@ -179,27 +155,27 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
         --[ Step 0 ] 
         stephover[0] = Lerp( 0.1, stephover[0], 1 )
         zPrint:roundedBox( 0, 532, 182, 6, 5 * stephover[0], Color( 255,50,80, 25 * stephover[0] ) )
-        zPrint:drawPicture( 519, 180, 32, 32, circleIcon, Color( 21, 22, 27, 255 ) )
-        zPrint:drawPicture( 523, 184, 24, 24, attachIcony, Color( 255,50,80, 25 * stephover[0] ) )
+        zPrint:drawPicture( 519, 180, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
+        zPrint:drawPicture( 523, 184, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[0] ) )
         --[ Step 1 ]        
         zPrint:roundedBox( 4, 532, 206, 6, 40 * stephover[1], Color( 255,50,80, 25 * stephover[1] ) )
-        zPrint:drawPicture( 519, 240, 32, 32, circleIcon, Color( 21, 22, 27, 255 ) )
-        zPrint:drawPicture( 523, 244, 24, 24, attachIcony, Color( 255,50,80, 25 * stephover[1] ) )
+        zPrint:drawPicture( 519, 240, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
+        zPrint:drawPicture( 523, 244, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[1] ) )
         --[ Step 2 ] 
         zPrint:roundedBox( 4, 532, 266, 6, 40 * stephover[2], Color( 255,50,80, 25 * stephover[2] ) )
-        zPrint:drawPicture( 519, 300, 32, 32, circleIcon, Color( 21, 22, 27, 255 ) )
-        zPrint:drawPicture( 523, 304, 24, 24, attachIcony, Color( 255,50,80, 25 * stephover[2] ) )
+        zPrint:drawPicture( 519, 300, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
+        zPrint:drawPicture( 523, 304, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[2] ) )
 
         zPrint:roundedBox( 4, 532, 326, 6, 40 * stephover[3], Color( 255,50,80, 25 * stephover[3] ) )
-        zPrint:drawPicture( 519, 360, 32, 32, circleIcon, Color( 21, 22, 27, 255 ) )
-        zPrint:drawPicture( 523, 364, 24, 24, attachIcony, Color( 255,50,80, 25 * stephover[3] ) )
+        zPrint:drawPicture( 519, 360, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
+        zPrint:drawPicture( 523, 364, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[3] ) )
 
         zPrint:roundedBox( 4, 532, 386, 6, 40 * stephover[4], Color( 255,50,80, 25 * stephover[4] ) )
         zPrint:roundedBox( 0, 532, 445, 6, 5 * stephover[5], Color( 255,50,80, 25 * stephover[5] ) )
-        zPrint:drawPicture( 519, 420, 32, 32, circleIcon, Color( 21, 22, 27, 255 ) )
-        zPrint:drawPicture( 523, 424, 24, 24, attachIcony, Color( 255,50,80, 25 * stephover[4] ) )
+        zPrint:drawPicture( 519, 420, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
+        zPrint:drawPicture( 523, 424, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[4] ) )
         
-        --------------------------------------------------------------------------------------------------------
+        ------------------------
     end
 
     zPrint:modifyContent( 0, scrollPanel )
@@ -434,12 +410,12 @@ function zPrint:modifyContent( tabIndex, parent )
                     --zPrint:roundedBox( 0, 0, 0, w, h, Color( 255, 50, 80, 150 * alpha ) )
                     zPrint:addText( v.name .. " Attachment", "Montserrat", 18, 25 + 5 * hover, 15, Color( 200, 50, 80, 50 * hover + 50 * alpha ), 0 )
                     zPrint:addText( v.desc, "Montserrat", 14, 25 + 5 * hover, 30, Color( 163, 163, 163, 50 * alpha ), 0 )
-                    zPrint:drawPicture(  -5 + 5 * hover, 0, 32, 32, right, Color( 200, 50, 80, 50 * alpha ) )
+                    zPrint:drawPicture(  -5 + 5 * hover, 0, 32, 32, zPrint:getIcon( "rightIcon" ), Color( 200, 50, 80, 50 * alpha ) )
                 else
                     --zPrint:roundedBox( 0, 0, h - 1, w, 1, Color( 80, 255, 50, 55 * alpha ) )
                     zPrint:addText( v.name .. " Attachment", "Montserrat", 18, 25 + 5 * hover, 15, Color( 80, 255, 80, 50 * hover + 50 * alpha ), 0 )
                     zPrint:addText( v.desc, "Montserrat", 14, 25 + 5 * hover, 30, Color( 163, 163, 163, 50 * alpha ), 0 )
-                    zPrint:drawPicture(  - 5 + 5 * hover, 0, 32, 32, right, Color( 80, 255, 80, 50 * alpha ) )
+                    zPrint:drawPicture(  - 5 + 5 * hover, 0, 32, 32, zPrint:getIcon( "rightIcon" ), Color( 80, 255, 80, 50 * alpha ) )
                 end
 
                 if slf:IsHovered() then
@@ -513,12 +489,12 @@ function zPrint:modifyContent( tabIndex, parent )
                     --zPrint:roundedBox( 0, 0, 0, w, h, Color( 255, 50, 80, 150 * alpha ) )
                     zPrint:addText( v.name, "Montserrat", 18, 25 + 5 * hover, 15, Color( 200, 50, 80, 50 * hover + 50 * alpha ), 0 )
                     zPrint:addText( "This job is not selected.", "Montserrat", 15, 25 + 5 * hover, 30, Color( 163, 163, 163, 50 * alpha ), 0 )
-                    zPrint:drawPicture(  -5 + 5 * hover, 0, 32, 32, attachIconn, Color( 200, 50, 80, 50 * alpha ) )
+                    zPrint:drawPicture(  -5 + 5 * hover, 0, 32, 32, zPrint:getIcon( "prohibitedIcon" ), Color( 200, 50, 80, 50 * alpha ) )
                 else
                     --zPrint:roundedBox( 0, 0, h - 1, w, 1, Color( 80, 255, 50, 55 * alpha ) )
                     zPrint:addText( v.name, "Montserrat", 18, 25 + 5 * hover, 15, Color( 80, 255, 80, 50 * hover + 50 * alpha ), 0 )
                     zPrint:addText( "This job is selected.", "Montserrat", 14, 25 + 5 * hover, 30, Color( 163, 163, 163, 50 * alpha ), 0 )
-                    zPrint:drawPicture(  - 5 + 5 * hover, 0, 32, 32, attachIcony, Color( 80, 255, 80, 50 * alpha ) )
+                    zPrint:drawPicture(  - 5 + 5 * hover, 0, 32, 32, zPrint:getIcon( "circleCheckIcon" ), Color( 80, 255, 80, 50 * alpha ) )
                 end
 
                 if slf:IsHovered() then

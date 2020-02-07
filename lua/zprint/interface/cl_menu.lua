@@ -1,9 +1,6 @@
 -- Menu Setup
 ------------------------------------------------------------------
 --Icons
-local closeIcon = Material( "materials/gprinters/circle_32.png", "smooth noclamp" )
-local catIcon = Material( "materials/gprinters/right_32_alt.png", "smooth noclamp" )
-local circleIcon = Material( "materials/gprinters/circle_clean_32.png", "smooth noclamp" )
 
 --Colors
 local closeColor = Color( 255, 255, 255, 75 )
@@ -91,7 +88,7 @@ function PANEL:Install()
     close:SetText( "" )
     close.Paint = function( slf, w, h )
         zPrint:updateColors( slf, closeColor )
-        zPrint:drawPicture( 0, 0, 32, 32, closeIcon, closeColor )
+        zPrint:drawPicture( 0, 0, 32, 32, zPrint:getIcon( "closeIcon" ), closeColor )
     end
 
     close.DoClick = function()
@@ -128,10 +125,10 @@ function PANEL:Install()
             zPrint:addText( v.name, "Montserrat", 16, 100 + 5 * hover, h / 2, Color( 163, 163, 163, 150 * alpha ), 1 )
 
             if ( mode == v.name ) then
-                zPrint:drawPicture(  7 * hover, 0, 32, 32, catIcon, Color( 200, 50, 80, 150 ) )
+                zPrint:drawPicture(  7 * hover, 0, 32, 32, zPrint:getIcon( "rightIcon" ), Color( 200, 50, 80, 150 ) )
                 hover = 1
             else
-                zPrint:drawPicture(  7 * hover, 0, 32, 32, catIcon, Color( 163, 163, 163, 150 ) )
+                zPrint:drawPicture(  7 * hover, 0, 32, 32, zPrint:getIcon( "rightIcon" ), Color( 163, 163, 163, 150 ) )
             end
 
             if slf:IsHovered() then
@@ -167,16 +164,16 @@ function PANEL:Install()
             zPrint:roundedBox( 0, w - 58, h - 27, 25, 25, Color( 21, 22, 27, 150 * alpha ) )
             
             if ( zPrint.plugins[ "Attachment" ][ v.name ] == true ) then
-                zPrint:drawPicture(  w - 62, 0, 32, 32, closeIcon, Color( 80, 200, 50, 50 * alpha ) )
+                zPrint:drawPicture(  w - 62, 0, 32, 32, zPrint:getIcon( "closeIcon" ), Color( 80, 200, 50, 50 * alpha ) )
             else
-                zPrint:drawPicture(  w - 62, 0, 32, 32, closeIcon, Color( 200, 50, 80, 50 * alpha ) )
+                zPrint:drawPicture(  w - 62, 0, 32, 32, zPrint:getIcon( "closeIcon" ), Color( 200, 50, 80, 50 * alpha ) )
             end
 
             if ( mode == v.name ) then
-                zPrint:drawPicture(  7 * hover, 0, 32, 32, catIcon, Color( 200, 50, 80, 150 ) )
+                zPrint:drawPicture(  7 * hover, 0, 32, 32, zPrint:getIcon( "rightIcon" ), Color( 200, 50, 80, 150 ) )
                 hover = 1
             else
-                zPrint:drawPicture(  7 * hover, 0, 32, 32, catIcon, Color( 163, 163, 163, 150 ) )
+                zPrint:drawPicture(  7 * hover, 0, 32, 32, zPrint:getIcon( "rightIcon" ), Color( 163, 163, 163, 150 ) )
             end
 
             if slf:IsHovered() then

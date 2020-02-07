@@ -1,5 +1,3 @@
-local picture = Material( "materials/gprinters/penguin_256.png", "smooth noclamp" )
-local img = Material( "materials/gprinters/weapon_128.png", "smooth clamp" )
 zPrint.tabs[ 8 ] = { loadPanels = function( parent )
     
 	local scrollPanel = vgui.Create( "zPrint.Parent", parent )
@@ -38,13 +36,13 @@ zPrint.tabs[ 8 ] = { loadPanels = function( parent )
                 zPrint:addText( v.displayName, "Montserrat", 24, w / 2, 20, Color( v.displayColor.r, v.displayColor.g, v.displayColor.b, 50 + 50 * hover ), 1 )
                 zPrint:roundedBox( 0, 0, 2, w * hover, 1, Color( v.displayColor.r, v.displayColor.g, v.displayColor.b, 50 + 50 * hover ) )
                 zPrint:roundedBox( 0, w - w * hover, h - 2, w * hover, 1, Color( v.displayColor.r, v.displayColor.g, v.displayColor.b, 50 + 50 * hover ) )
-                zPrint:drawPicture(  w / 2 - 128, h / 2 - 128, 256, 256, picture, Color( v.displayColor.r, v.displayColor.g, v.displayColor.b, 2 + 50 * hover ) )
+                zPrint:drawPicture(  w / 2 - 128, h / 2 - 128, 256, 256, zPrint:getIcon( "penguinIcon" ), Color( v.displayColor.r, v.displayColor.g, v.displayColor.b, 2 + 50 * hover ) )
             
             else
                 zPrint:roundedBox( 0, 0, 0, w, h, Color( 21, 22, 27, 150 ) )
                 zPrint:addText( v.displayName, "Montserrat", 24, w / 2, 20, Color( 72, 72, 72, 50 ), 1 )
                 zPrint:addText( "This Admin Mode is not installed", "Montserrat", 16, w / 2, 45, Color( 72, 72, 72, 50 ), 1 )
-                zPrint:drawPicture(  w / 2 - 128, h / 2 - 128, 256, 256, picture, Color( 72, 72, 72, 50  ) )
+                zPrint:drawPicture(  w / 2 - 128, h / 2 - 128, 256, 256, zPrint:getIcon( "penguinIcon" ), Color( 72, 72, 72, 50  ) )
             end
             
             if slf:IsHovered() || ( v.displayName == zPrint.plugins[ "Other" ].adminMode ) then

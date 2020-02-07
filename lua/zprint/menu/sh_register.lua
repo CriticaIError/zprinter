@@ -37,12 +37,12 @@ if CLIENT then
             for key, value in pairs( zPrint.printers || {} ) do
                 for _, i in pairs( zPrint.printers[ "Printers" ][ value ] || value ) do
                     if ( v.cmd == i.cmd ) then
-                        return false
+                        return true
                     end
                 end
             end
         end
-        return true    
+        return false
     end
     
     function zPrint:formValidation( printer, id )

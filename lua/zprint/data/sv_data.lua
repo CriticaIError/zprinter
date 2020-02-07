@@ -70,6 +70,7 @@ function zPrint:registerPrinter( name, settings )
         zPrint.printers[ name ] = util.JSONToTable( file.Read( fileLoc ) )
     end
 
+    --[[
     for k, v in pairs( player.GetAll() ) do
         -- Current Printer Information Stored In zPrint
         zPrint:addPrinter( v.name, {
@@ -77,6 +78,7 @@ function zPrint:registerPrinter( name, settings )
             name = v.name
         }, v.cmd )
     end
+    ]]
 end
 
 function zPrint.removePrinter( id )

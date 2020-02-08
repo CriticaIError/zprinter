@@ -9,7 +9,6 @@ function zPrint:registerIcon( name, mat )
     table.Merge( zPrint.Icons, icon )
 end
 
-
 zPrint:registerIcon( "circleCheck", "materials/gprinters/circle_check_32.png" )
 zPrint:registerIcon( "circleClean", "materials/gprinters/circle_clean_32.png" )
 zPrint:registerIcon( "prohibited", "materials/gprinters/prohibited_32.png" )

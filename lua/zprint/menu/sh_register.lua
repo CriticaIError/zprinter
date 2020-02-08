@@ -1,6 +1,9 @@
-
-local pTable = {}
-local pID = ""
+--:: File Variables
+local mClamp = math.Clamp
+local L = Lerp
+local redColor = Color( 200, 50, 80, 150 )
+local whiteColor = Color( 163, 163, 163, 150 )
+--:::::::::::::::::::::::::
 local stephover = {}
 local stepcolor = {}
 for i = 0, 6 do
@@ -8,88 +11,15 @@ for i = 0, 6 do
     stepcolor[ i ] = 15
 end
 
-if SERVER then
-    util.AddNetworkString( "zPrint.registerPrinters" )
-    net.Receive( "zPrint.registerPrinters", function( len, ply )
-        if !ply:IsSuperAdmin() then return end
-        local printer = net.ReadTable()
-
-        for k, v in pairs( printer || {} ) do
-            for key, value in pairs( zPrint.printers || {} ) do
-                for _, i in pairs( zPrint.printers[ "Printers" ][ value ] || value ) do
-                    if ( v.cmd == i.cmd ) then
-                        ply:ChatPrint( "Printer already exist in our database" )
-                        return 
-                    end
-                end
-            end
-        end
-
-        for k, v in pairs( printer || {} ) do
-            zPrint:registerPrinter( "Printers", printer )
-        end
-    end )
-end
-
-if CLIENT then
-    function zPrint:checkDatabase( printer )
-        for k, v in pairs( printer || {} ) do
-            for key, value in pairs( zPrint.printers || {} ) do
-                for _, i in pairs( zPrint.printers[ "Printers" ][ value ] || value ) do
-                    if ( v.cmd == i.cmd ) then
-                        return true
-                    end
-                end
-            end
-        end
-        return false
-    end
-    
-    function zPrint:formValidation( printer, id )
-        local ent = printer[ id ]
-        if ent.name == "" || ent.color == "" || ent.sound == "Choose your sound" || ent.sound == "" || ent.category == "Select Category" || ent.health == "" || ent.health == 0 || ent.amount == "" || ent.tiempo == "" || ent.holdamount == "" || ent.f4order == "" || ent.cpremovalval == "" || ent.policeremovalreward == "" || donation_rank == "" || ent.overheatchance == "" || ent.printer_level == "" then
-            return true
-        end
-        return false
-    end
-
-    function zPrint:notifyCreation( title, msg, parent, img, color )
-        local imgs = Material( img, "smooth noclamp" )
-        local note = vgui.Create( "DPanel", parent )
-        note:SetSize( 320, 30 )
-        note:SetAlpha( 0 )
-        note:AlphaTo( 255, 1, 0 )
-        note:SetPos( 220, 145 )
-        note.Paint = function( slf, w, h )
-            zPrint:roundedBox( 6, 0, 0, w, h, Color( 5, 5, 5, 55 ) )
-            zPrint:drawPicture(  0, 0, 32, 32, imgs, color )
-            zPrint:addText( title, "Montserrat", 16, 30, 8, color, 0 )
-            zPrint:addText( msg, "Montserrat", 16, 30, 20, Color( 163, 163, 163, 150 ), 0 )
-        end
-
-        timer.Simple( 1, function()
-            if IsValid( note ) then
-                note:AlphaTo( 0, 1, 0, function() if note && note:IsValid() then note:Remove() end end )
-            end
-        end )
-    end
-end
-
 zPrint.tabs[ 9 ] = { loadPanels = function( parent )
-  --------------------------------------------------------------------------------  
-    table_jobs = {}
-    attachments = {}
-    group_table = {}
-    local status = true
     local steps = 0
-    local time = CurTime()
-    local tim = 1
+    local defaultTime = CurTime()
 	local scrollPanel = vgui.Create( "zPrint.Parent", parent )
 	scrollPanel:SetSize( parent:GetWide(), parent:GetTall() )
     scrollPanel:SetAlpha( 0 )
     scrollPanel:AlphaTo( 255, 0.5, 0 )
     scrollPanel.Paint = function( slf, w, h )
-        local alpha = Lerp( math.Clamp( ( CurTime( ) - time ) / tim, 0, 1 ), 0, 1 )
+        local alpha = L( mClamp( ( CurTime( ) - defaultTime ), 0, 1 ), 0, 1 )
         zPrint:addText( "Printer Registration", "Montserrat", 24, 15, 15, Color( 163, 163, 163, 150 ), 0 )
         zPrint:roundedBox( 0, 10, 30, ( w - 20 ) * alpha, 2, Color( 5, 5, 5, 75 ) )
         
@@ -122,18 +52,16 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
         zPrint:addText( "Configurations for the printer.", "Montserrat", 18, 555 + 20 * stephover[ 4 ], 430, Color( 163, 163, 163, stepcolor[ 4 ] ), 0 )
     end
 
-
-    local first = vgui.Create( 'DPanel', scrollPanel )
-    first:SetPos( 0, 0 )
-    first:SetSize( scrollPanel:GetWide(), scrollPanel:GetTall() )
-    first.Paint = function( slf, w, h )
-        local alpha = Lerp( math.Clamp( ( CurTime( ) - time ) / tim, 0, 1 ), 0, 1 )
+    local coreTab = vgui.Create( 'DPanel', scrollPanel )
+    coreTab:SetPos( 0, 0 )
+    coreTab:SetSize( scrollPanel:GetWide(), scrollPanel:GetTall() )
+    coreTab.Paint = function( slf, w, h )
+        local alpha = L( mClamp( ( CurTime( ) - defaultTime ), 0, 1 ), 0, 1 )
         
         zPrint:roundedBox( 0, 7, 40, w - 18, 100, Color( 21, 22, 27, 150 ) )
         zPrint:addText( "zPrint Registration", "Montserrat", 24, 105, 75, Color( 200, 50, 80, 150 ), 0 )
         zPrint:addText( "Before starting the registration progress you must choose a model, remember to copy it in the box below, ", "Montserrat", 19, 105, 93, Color( 163, 163, 163, 150 ), 0 )
         zPrint:addText( "it will display something if it's correct, otherwise it will be empty.", "Montserrat", 19, 105, 110, Color( 163, 163, 163, 150 ), 0 )
-
 
         zPrint:drawPicture( -5, 25, 128, 128, zPrint:getIcon( "craftsIcon" ), Color( 163, 163, 163, 50 * alpha ) )
         zPrint:roundedBox( 0, 530, 180, 10, 270, Color( 21, 22, 27, 150 * alpha  ) )
@@ -141,7 +69,6 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
         zPrint:roundedBox( 0, 545, 142, 330, 36, Color( 21, 22, 27, 150 * alpha  ) )
         zPrint:roundedBox( 0, 7, 142, 536, 36, Color( 21, 22, 27, 150 * alpha  ) )
 
-        --[ Steps Setup ]
         local n = 5
         for i = 0,n do
             if steps >= i then
@@ -151,17 +78,15 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
             end
         end
 
-        --------------------------------------------------------------------------------------------------------
-        --[ Step 0 ] 
         stephover[0] = Lerp( 0.1, stephover[0], 1 )
         zPrint:roundedBox( 0, 532, 182, 6, 5 * stephover[0], Color( 255,50,80, 25 * stephover[0] ) )
         zPrint:drawPicture( 519, 180, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
         zPrint:drawPicture( 523, 184, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[0] ) )
-        --[ Step 1 ]        
+   
         zPrint:roundedBox( 4, 532, 206, 6, 40 * stephover[1], Color( 255,50,80, 25 * stephover[1] ) )
         zPrint:drawPicture( 519, 240, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
         zPrint:drawPicture( 523, 244, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[1] ) )
-        --[ Step 2 ] 
+
         zPrint:roundedBox( 4, 532, 266, 6, 40 * stephover[2], Color( 255,50,80, 25 * stephover[2] ) )
         zPrint:drawPicture( 519, 300, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
         zPrint:drawPicture( 523, 304, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[2] ) )
@@ -174,10 +99,7 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
         zPrint:roundedBox( 0, 532, 445, 6, 5 * stephover[5], Color( 255,50,80, 25 * stephover[5] ) )
         zPrint:drawPicture( 519, 420, 32, 32, zPrint:getIcon( "circleCleanIcon" ), Color( 21, 22, 27, 255 ) )
         zPrint:drawPicture( 523, 424, 24, 24, zPrint:getIcon( "circleCheckIcon" ), Color( 255,50,80, 25 * stephover[4] ) )
-        
-        ------------------------
     end
-
     zPrint:modifyContent( 0, scrollPanel )
 
     local phover = 0
@@ -232,7 +154,7 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
         end
         zPrint:modifyContent( steps, scrollPanel )
     end
-
+    
     local nhover = 0
     local back = Color( 0, 0, 0 )
     local next = vgui.Create( "DButton", scrollPanel )
@@ -241,9 +163,9 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
     next:SetText( "" )
     next.Paint = function( slf, w, h )
         if slf:IsHovered() then
-            nhover = Lerp( 0.1, nhover, 1 )
+            nhover = L( 0.1, nhover, 1 )
         else
-            nhover = Lerp( 0.1, nhover, 0 )
+            nhover = L( 0.1, nhover, 0 )
         end
 
         if ( steps <= 0 ) && IsValid( valueMod ) && !util.IsValidModel( valueMod:GetValue() ) then
@@ -262,59 +184,12 @@ zPrint.tabs[ 9 ] = { loadPanels = function( parent )
         end
     end
     next.DoClick = function( slf )
-        if steps >= 4 then
-            pTable[ pID ] = {
-                cmd = string.lower( "z" .. string.Replace( name:GetValue(), " ", "_" ) ),
-                name = name:GetValue(),
-                health = health:GetValue(),
-                sound = sound:GetValue(),
-                category = category:GetValue(),
-                amount = amount:GetValue(),
-                tiempo = tiempo:GetValue(),
-                holdamount = holdamount:GetValue(),
-                f4order = f4order:GetValue(),
-                cpremovalval = cpremovalval,
-                policeremovalreward = policeremovalreward:GetValue(),
-                donation_rank = donation_rank:GetValue(),
-                overheatchance = overheatchance:GetValue(),
-                printer_level = printer_level:GetValue(),
-                color = pcolor.valor
-            }
-
-
-            if zPrint:formValidation( pTable, pID ) then
-                zPrint:notifyCreation( "Warning", "Please complete the entire form.", scrollPanel, "materials/gprinters/prohibited_32.png", Color( 200, 50, 80, 255 ) )
-                slf.cooldown = CurTime() + 3
-                return
-            end
-            
-            --> Verify if the printer exist in the database. 
-            if zPrint:checkDatabase( pTable[ pID ] ) then
-                zPrint:notifyCreation( "Warning", "Please verify that the printer doesn't exist.", scrollPanel, "materials/gprinters/prohibited_32.png", Color( 200, 50, 80, 255 ) )
-                slf.cooldown = CurTime() + 3
-                return
-            end
-
-            if !LocalPlayer():IsSuperAdmin() then
-                zPrint:notifyCreation( "Warning", "You don't have enough privileges to create.", scrollPanel, "materials/gprinters/prohibited_32.png", Color( 200, 50, 80, 255 ) )
-                slf.cooldown = CurTime() + 3
-                return
-            end
-
-            zPrint:notifyCreation( "Success", "Printer Created Successfully.", scrollPanel, "materials/gprinters/circle_check_32.png", Color( 80, 200, 50, 150 ) )
-
-            net.Start( "zPrint.registerPrinters" )
-                net.WriteTable( pTable )
-            net.SendToServer()
-        end
         if steps <= 3 then
             steps = steps + 1
             zPrint:modifyContent( steps, scrollPanel )
         end
-        
     end
 end }
-
 
 function zPrint:modifyContent( tabIndex, parent )
     if IsValid( workPanel ) then
@@ -358,11 +233,6 @@ function zPrint:modifyContent( tabIndex, parent )
                 status = true
             end
         end
-        
-        pTable[ valueMod:GetValue() ] = {
-            model = valueMod:GetValue()
-        }
-        pID = valueMod:GetValue()
 
         workPanel.PaintOver = function( slf, w, h )
             local alpha = Lerp( math.Clamp( ( CurTime( ) - time ) / tim, 0, 1 ), 0, 1 )
@@ -546,7 +416,6 @@ function zPrint:modifyContent( tabIndex, parent )
         name:SetPos( 15, 205 )
         name:SetSize( 242.5, 20 )
         name:SetNumeric( false )
-        name:SetValue( pTable[ pID ].name || "" )
 
         health = vgui.Create( "zprinters_textinput", workPanel )
         health:SetPos( 15, 245 )

@@ -1,6 +1,8 @@
-
---  zPrinters - New Printers System
---  Version. 1.00
+--[[
+    zPrinters Version 1.0.0
+    Models by ZeroChain
+    Code by Zoey
+]]
 
 zPrint = zPrint || {}
 zPrint.aMode = zPrint.aMode || {}
@@ -59,4 +61,4 @@ else
     end )
 end
 
-    util.PrecacheModel( "models/gprinter/gprinter_base.mdl" )
+util.PrecacheModel( "models/zerochain/props_zprinter/zpr_printer.mdl" )

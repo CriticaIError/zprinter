@@ -70,6 +70,9 @@ function zPrint:registerPrinter( name, settings )
         zPrint.printers[ name ] = util.JSONToTable( file.Read( fileLoc ) )
     end
 
+    for k, v in pairs( player.GetAll() ) do
+        zPrint.syncPrinters( v, "Printers" )
+    end
     --[[
     for k, v in pairs( player.GetAll() ) do
         -- Current Printer Information Stored In zPrint

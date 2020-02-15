@@ -179,8 +179,7 @@ local P4 = {}
 function P4:Init()
     self:SetSize( 140, 20 )
     self:SetText( "" )
-    self.valor = Vector( 163, 163, 163 )
-    self.plugins = ""
+    self.valor = self.valor or Color( 163, 163, 163 )
 end
 
 function P4:DoClick()
@@ -222,7 +221,11 @@ function P4:DoClick()
     cbtn.DoClick = function()
         if self && self:IsValid() then
             self.valor = Vector( Mixer:GetColor().r, Mixer:GetColor().g, Mixer:GetColor().b )
+            net.Start( "zPrint.changeSetting" )
+                net.WriteTable( { plugin = "PrinterSettings", setting = "color", value = self.valor } )
+            net.SendToServer()
             colorpicker:Remove()
+
         else
             colorpicker:Remove()
         end
@@ -234,3 +237,29 @@ function P4:Paint( w, h )
     zPrint:addText( math.Round( self.valor.r ) .. " " .. math.Round( self.valor.g ) .. " " .. math.Round( self.valor.b ), "Montserrat", 14, w / 2, h / 2, Color( self.valor.r, self.valor.g, self.valor.b, 175 ), 1 )
 end
 vgui.Register( "zprinter_color", P4, "DButton" )
+
+local P5 = {}
+function P5:Init()
+    self:SetSize( 140, 20 )
+    self:SetText( "Choose your sound" )
+    self:AddChoice( "ambient/levels/labs/equipment_printer_loop1.wav" )
+end
+
+function P5:Paint( w, h )
+    zPrint:roundedBox( 0, 0, 0, w, h, Color( 5, 5, 5, 100 ) )
+end
+vgui.Register( "zprinter_dcombobox", P5, "DComboBox" )
+
+local P6 = {}
+function P6:Init()
+    self:SetSize( 140, 20 )
+    self:SetText( "Select Category" )
+    for k, v in pairs( DarkRP.getCategories()[ "entities" ] ) do
+        self:AddChoice( v.name )
+    end
+end
+
+function P6:Paint( w, h )
+    zPrint:roundedBox( 0, 0, 0, w, h, Color( 5, 5, 5, 100 ) )
+end
+vgui.Register( "zprinter_category", P6, "DComboBox" )

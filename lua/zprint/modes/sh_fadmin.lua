@@ -1,4 +1,3 @@
-group_table = {}
 zPrint.aMode[ "FAdmin System" ] = {
     displayName = "FAdmin System",
     displayColor = Color( 255, 163, 0 ),

@@ -23,7 +23,7 @@ zPrint.aMode[ "ULX System" ] = {
             button.tab = nil
             button.Paint = function( slf, w, h )
                 local alpha = Lerp( math.Clamp( ( CurTime( ) - time ) / tim, 0, 1 ), 0, 1 )
-                if !table.HasValue( group_table, v ) then
+                if !table.HasValue( zGroup, v ) then
                     --zPrint:roundedBox( 0, 0, 0, w, h, Color( 255, 50, 80, 150 * alpha ) )
                     zPrint:addText( v, "Montserrat", 18, 25 + 5 * hover, 15, Color( 200, 50, 80, 50 * hover + 50 * alpha ), 0 )
                     zPrint:addText( "This group is not selected.", "Montserrat", 15, 25 + 5 * hover, 30, Color( 163, 163, 163, 50 * alpha ), 0 )
@@ -43,16 +43,16 @@ zPrint.aMode[ "ULX System" ] = {
             end
 
             button.DoClick = function()
-                if table.HasValue( group_table, v ) then
-                    table.RemoveByValue( group_table, v )
+                if table.HasValue( zGroup, v ) then
+                    table.RemoveByValue( zGroup, v )
                 else
-                    table.insert( group_table, v )
+                    table.insert( zGroup, v )
                 end
             end
             jobs:AddItem( button )
         end
     end,
-    rankTable = function() return group_table end,
+    rankTable = function() return zGroup end,
     enableFunction = function()
         if xgui then
             return true

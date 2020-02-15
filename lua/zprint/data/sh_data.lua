@@ -46,6 +46,24 @@ if SERVER then
         settings.stealerMsg = "The printer is secured, you can destroy the protection in order to retrieve the money"
         zPrint:registerPlugin( "General", settings )
 
+        local p = {}
+        p.name = "Printers Name"
+        p.health = 100
+        p.amount = 10
+        p.time = 10
+        p.maxhold = 10
+        p.f4order = 10
+        p.sound = ""
+        p.category = ""
+        p.removalreward = 10
+        p.secondarygroup = 10
+        p.overheatchance = 10
+        p.color = 10
+        p.level = 10
+        p.f4price = 1000
+        p.f4amount = 1
+        zPrint:registerPlugin( "PrinterSettings", p )
+
         local printers = {}
         zPrint:registerPlugin( "Printers", printers )
     end )
@@ -67,5 +85,21 @@ else
 	zPrint.addLanguage( "General", "secureMsg", "Printer's message when it's secured." )
 	zPrint.addLanguage( "General", "stealerMsg", "Message to the stealer if printer is secured." )
 	zPrint.addLanguage( "General", "overheatMsg", "Notify if the printer is overheating?" )
-	zPrint.addLanguage( "General", "overheatM", "Overheat message." )
+    zPrint.addLanguage( "General", "overheatM", "Overheat message." )
+    
+    zPrint.addLanguage( "PrinterSettings", "name", "Printers Name" )
+    zPrint.addLanguage( "PrinterSettings", "health", "Printers Health" )
+    zPrint.addLanguage( "PrinterSettings", "amount", "Printers Print Amount" )
+    zPrint.addLanguage( "PrinterSettings", "time", "Printer Printing Time" )
+    zPrint.addLanguage( "PrinterSettings", "maxhold", "Printers Max Amount Of Money" )
+    zPrint.addLanguage( "PrinterSettings", "f4order", "Printers F4 Order" )
+    zPrint.addLanguage( "PrinterSettings", "sound", "Printers Sound" )
+    zPrint.addLanguage( "PrinterSettings", "category", "Printers Category" )
+    zPrint.addLanguage( "PrinterSettings", "removalreward", "Printers Removal Reward ( 0 to disable )" )
+    zPrint.addLanguage( "PrinterSettings", "secondarygroup", "Printers Secondary Usergroup ( Donation System )" )
+    zPrint.addLanguage( "PrinterSettings", "overheatchance", "Printers Overheat Chance ( 0 to disable )" )
+    zPrint.addLanguage( "PrinterSettings", "color", "Printers Color" )
+    zPrint.addLanguage( "PrinterSettings", "level", "Printers Level ( 0 to disable )" )
+    zPrint.addLanguage( "PrinterSettings", "f4price", "Printers F4 Price" )
+    zPrint.addLanguage( "PrinterSettings", "f4amount", "Printers F4 Amount" )
 end

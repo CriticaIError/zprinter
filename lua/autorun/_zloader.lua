@@ -12,6 +12,7 @@ zPrint.tabs = zPrint.tabs || {}
 zPrint.Language = zPrint.Language || {}
 zPrint.cfg = zPrint.cfg || {}
 zPrint.Icons = zPrint.Icons || {}
+zPrint.wizard = zPrint.wizard || {}
 
 local variables = {
     "syncSettings",
